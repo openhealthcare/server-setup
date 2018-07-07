@@ -1,0 +1,15 @@
+; =====================
+;  manage.py supervisor
+; =====================
+
+[program:gunicorn]
+command={{ VIRTUALENV_PATH }}/bin/gunicorn {{ APPLICATION_NAME }}.wsgi -c %(here)s/gunicorn_conf.py
+directory=%(here)s/../../
+;user=nobody
+numprocs=1
+stdout_logfile={{ LOG_DIR }}/gunicorn.log
+stderr_logfile={{ LOG_DIR }}/gunicorn.log
+autostart=true
+autorestart=true
+startsecs=10
+loglevel=DEBUG
