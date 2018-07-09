@@ -1,33 +1,27 @@
 ---
 - name: Things you want on servers generally
   sudo: yes
-  user: ubuntu
+  user: "{{ LINUX_USER }}"
   hosts: webserver
   gather_facts: no
   roles:
     - server
 
 - name: Make the server capable of running a standard Django deployment
-  user: ubuntu
+  user: "{{ LINUX_USER }}"
   hosts: webserver
   roles:
     - django
 
 - name: Make the server capable of running a standard Django deployment
   sudo: yes
-  user: ubuntu
+  user: "{{ LINUX_USER }}"
   hosts: webserver
   roles:
     - db
 
 - name: Set up our project
-  user: ubuntu
+  user: "{{ LINUX_USER }}"
   hosts: webserver
   roles:
     - project
-
-- name: Set the project back ups
-  user: ubuntu
-  hosts: webserver
-  roles:
-    - backup

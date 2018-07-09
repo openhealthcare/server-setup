@@ -29,12 +29,12 @@
     path: "{{ VIRTUALENV_PATH }}/"
 
 - name: Create the virtualenv
-  shell: . /usr/share/virtualenvwrapper/virtualenvwrapper.sh && mkvirtualenv -p /usr/bin/python3 {{ APPLICATION_NAME }}
+  shell: . /usr/share/virtualenvwrapper/virtualenvwrapper.sh && mkvirtualenv -p /usr/bin/python3 {{ PROJECT_BRANCH }}
   args:
     executable: /bin/bash
 
 - name: Create the virtualenv project
-  shell: . /usr/share/virtualenvwrapper/virtualenvwrapper.sh && setvirtualenvproject
-  chdir: "{{ PROJECT_PATH}}"
+  shell: . /usr/share/virtualenvwrapper/virtualenvwrapper.sh && workon {{ PROJECT_BRANCH }} && setvirtualenvproject
+  chdir: "{{ PROJECT_PATH }}"
   args:
     executable: /bin/bash

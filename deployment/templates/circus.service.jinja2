@@ -1,0 +1,17 @@
+[Unit]
+Description=Circus process manager
+After=syslog.target network.target nss-lookup.target
+
+[Service]
+Type=simple
+ExecReload=/usr/bin/circusctl reload
+ExecStart=/usr/bin/circusd /etc/circus/circusd.ini
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+
+[socket:web]
+host = localhost
+port = 8081

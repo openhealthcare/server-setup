@@ -22,3 +22,10 @@
     - build-essential
     - circus
     - nginx
+
+- name: set up bashrc
+  template:
+    src: "templates/bashrc"
+    dest: "~/.bashrc"
+    mode: 0744
+    owner: "{{ LINUX_USER }}"
