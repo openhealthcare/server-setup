@@ -38,9 +38,14 @@
 # blows up the world
 - name: Creates gunicorn log
   file:
-    path: "{{ LOG_DIR }}/gunicorn.log"
+    path: "{{ LOG_DIR }}/{{ item }}"
     state: touch
     owner: "{{ LINUX_USER }}"
+  with_items:
+    - gunicorn.log
+    - gunicorn.stdout.log
+    - gunicorn.stderr.log
+    - nginx.log
 
 - name: Create configs
   template:
@@ -68,6 +73,11 @@
   args:
     chdir: "{{ PROJECT_PATH}}"
   command: "{{ VIRTUALENV_PATH }}/bin/python manage.py migrate"
+
+- name: Run load lookup lists
+  args:
+    chdir: "{{ PROJECT_PATH}}"
+  command: "{{ VIRTUALENV_PATH }}/bin/python manage.py load_lookup_lists"
 
 - name: Run Django collectstatic
   args:
@@ -114,11 +124,9 @@
     dest: "/etc/systemd/system/circus.service"
 
 - name: Restart circus
-  become: yes
   command: "circusctl reload"
   ignore_errors: True
 
 - name: Restart circus
-  become: yes
   command: "circusctl restart"
   ignore_errors: True

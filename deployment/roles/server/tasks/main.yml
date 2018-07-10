@@ -26,6 +26,6 @@
 - name: set up bashrc
   template:
     src: "templates/bashrc"
-    dest: "~/.bashrc"
+    dest: "/home/{{ LINUX_USER }}/.bashrc"
     mode: 0744
     owner: "{{ LINUX_USER }}"

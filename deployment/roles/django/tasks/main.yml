@@ -33,8 +33,9 @@
   args:
     executable: /bin/bash
 
-- name: Create the virtualenv project
-  shell: . /usr/share/virtualenvwrapper/virtualenvwrapper.sh && workon {{ PROJECT_BRANCH }} && setvirtualenvproject
-  chdir: "{{ PROJECT_PATH }}"
-  args:
-    executable: /bin/bash
+- name: set up bashrc
+  template:
+    src: "templates/project"
+    dest: "{{ VIRTUALENV_PATH }}/.project"
+    mode: 0744
+    owner: "{{ LINUX_USER }}"
