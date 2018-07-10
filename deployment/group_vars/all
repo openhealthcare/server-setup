@@ -23,3 +23,4 @@ REQUIREMENTS_FILE: "{{ PROJECT_PATH }}/requirements.txt"
 LOG_DIR: "{{ DEPLOYMENT_LOCATION }}/log"
 
 CONFIG_DIR: "{{ PROJECT_PATH }}/deployment/config"
+PROXY: false

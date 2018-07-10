@@ -60,7 +60,15 @@
 
 - name: Install packages required by the Django app inside virtualenv
   pip: virtualenv={{ VIRTUALENV_PATH }} requirements={{ REQUIREMENTS_FILE }}
+  when: not PROXY
   executable: pip3
+
+- name: Install packages required by the Django app inside virtualenv
+  pip: virtualenv={{ VIRTUALENV_PATH }} requirements={{ REQUIREMENTS_FILE }}
+  when: PROXY
+  executable: pip3
+  environment:
+    http_proxy: "{{ PROXY }}"
 
 - name: Create local settings
   template:
