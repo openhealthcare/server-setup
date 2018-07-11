@@ -69,6 +69,7 @@
   executable: pip3
   environment:
     http_proxy: "{{ PROXY }}"
+    https_proxy: "{{ PROXY }}"
 
 - name: Create local settings
   template:
