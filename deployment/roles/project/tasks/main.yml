@@ -60,12 +60,12 @@
 
 - name: Install packages required by the Django app inside virtualenv
   pip: virtualenv={{ VIRTUALENV_PATH }} requirements={{ REQUIREMENTS_FILE }}
-  when: not PROXY
+  when: not USE_PROXY
   executable: pip3
 
 - name: Install packages required by the Django app inside virtualenv
   pip: virtualenv={{ VIRTUALENV_PATH }} requirements={{ REQUIREMENTS_FILE }}
-  when: PROXY
+  when: USE_PROXY
   executable: pip3
   environment:
     http_proxy: "{{ PROXY }}"
